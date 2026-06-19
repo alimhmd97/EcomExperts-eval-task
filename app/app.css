@@ -18,6 +18,9 @@
 
   /* Lines */
   --color-border: #e8eaee;
+
+  /* Bundle builder wide layout (1735px) */
+  --breakpoint-builder: 108.4375rem;
 }
 
 html,

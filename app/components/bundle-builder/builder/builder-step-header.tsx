@@ -31,7 +31,7 @@ export function BuilderStepHeader({
         onClick={onToggle}
         aria-expanded={isOpen}
         aria-controls={panelId}
-        className="flex h-[88px] w-full items-center gap-4 px-5 text-left outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+        className="flex h-[68px] w-full items-center gap-4 px-5 text-left outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
       >
         <span className="flex flex-1 flex-col gap-1.5">
          

@@ -35,15 +35,16 @@ export function BundleBuilderPage() {
 
   return (
     <BundleCartProvider>
-      <main className="mx-auto max-w-7xl px-4 py-8">
-        <h1 className="mb-8 text-3xl">Let&apos;s get started!</h1>
+      <main className="mx-auto max-w-7xl px-4 py-8 builder:max-w-none builder:px-10">
 
-        <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_min(24rem,100%)] lg:items-start">
-          <BuilderAccordion
-            products={products}
-            openStepId={BuilderStepId.Cameras}
-          />
-          <div className="lg:sticky lg:top-8">
+        <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_min(24rem,100%)] lg:items-start builder:flex builder:flex-col">
+          <div className="builder:w-full">
+            <BuilderAccordion
+              products={products}
+              openStepId={BuilderStepId.Cameras}
+            />
+          </div>
+          <div className="lg:sticky lg:top-8 builder:static builder:w-full">
             <ReviewPanel products={products} />
           </div>
         </div>
