@@ -4,7 +4,6 @@ import {
   useContext,
   useEffect,
   useMemo,
-  useRef,
   useState,
   type ReactNode,
 } from "react";
@@ -13,6 +12,7 @@ import {
   loadCartFromStorage,
   saveCartToStorage,
 } from "~/lib/bundle/persistence";
+import { seedSelections } from "~/lib/bundle/seed";
 import type { CartSelection } from "~/types/catalog";
 
 type BundleCartContextValue = {
@@ -23,6 +23,8 @@ type BundleCartContextValue = {
     variantId: string | null,
     quantity: number,
   ) => void;
+  /** Persist the current configuration ("Save my system for later"). */
+  save: () => void;
   clear: () => void;
 };
 
@@ -37,25 +39,16 @@ type BundleCartProviderProps = {
 };
 
 export function BundleCartProvider({ children }: BundleCartProviderProps) {
-  const [selections, setSelections] = useState<CartSelection[]>([]);
-  // Skip persisting until the stored cart has been loaded, so we don't
-  // overwrite saved selections with the empty initial state on mount.
-  const isLoaded = useRef(false);
+  // Start from the design seed so the first paint (and SSR) matches the
+  // design; if the shopper previously saved a system, restore it on mount.
+  const [selections, setSelections] = useState<CartSelection[]>(seedSelections);
 
   useEffect(() => {
     const stored = loadCartFromStorage();
     if (stored) {
       setSelections(stored);
     }
-    isLoaded.current = true;
   }, []);
-
-  useEffect(() => {
-    if (!isLoaded.current) {
-      return;
-    }
-    saveCartToStorage(selections);
-  }, [selections]);
 
   const getQuantity = useCallback(
     (productId: string, variantId: string | null) =>
@@ -84,11 +77,15 @@ export function BundleCartProvider({ children }: BundleCartProviderProps) {
     [],
   );
 
+  const save = useCallback(() => {
+    saveCartToStorage(selections);
+  }, [selections]);
+
   const clear = useCallback(() => setSelections([]), []);
 
   const value = useMemo<BundleCartContextValue>(
-    () => ({ selections, getQuantity, setQuantity, clear }),
-    [selections, getQuantity, setQuantity, clear],
+    () => ({ selections, getQuantity, setQuantity, save, clear }),
+    [selections, getQuantity, setQuantity, save, clear],
   );
 
   return (

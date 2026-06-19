@@ -1,65 +1,85 @@
-# Welcome to React Router!
+# Wyze Bundle Builder
 
-A modern, production-ready template for building full-stack React applications using React Router.
+A multi-step bundle builder with a live review panel, built as a React prototype
+from the provided Figma design. Assemble a security system across four steps
+(cameras, plan, sensors, extra protection) and watch the "Your security system"
+summary recalculate as you go.
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/remix-run/react-router-templates/tree/main/default)
+## Run it
 
-## Features
-
-- 🚀 Server-side rendering
-- ⚡️ Hot Module Replacement (HMR)
-- 📦 Asset bundling and optimization
-- 🔄 Data loading and mutations
-- 🔒 TypeScript by default
-- 🎉 TailwindCSS for styling
-- 📖 [React Router docs](https://reactrouter.com/)
-
-## Getting Started
-
-### Installation
-
-Install the dependencies:
+Requires **Node 22.22+** and npm.
 
 ```bash
 npm install
-```
-
-### Development
-
-Start the development server with HMR:
-
-```bash
 npm run dev
 ```
 
-Your application will be available at `http://localhost:5173`.
+Open <http://localhost:5173>. The app is self-contained — the product catalog is
+a local JSON file (`data/db.json`) bundled at build time, so no backend is needed.
 
-## Building for Production
+### Optional: serve the catalog from an API (bonus)
 
-Create a production build:
+`data/db.json` can also be served over HTTP via JSON Server:
 
 ```bash
-npm run build
+npm run api       # http://localhost:3001/products
+npm run dev:all   # API + web together
 ```
 
-## Deployment
+This is a bonus only; the UI does not depend on it.
 
-If you're familiar with deploying Node applications, the built-in app server is production-ready.
+### Other scripts
 
-Make sure to deploy the output of `npm run build`
-
-```
-├── package.json
-├── package-lock.json (or pnpm-lock.yaml, or bun.lockb)
-├── build/
-│   ├── client/    # Static assets
-│   └── server/    # Server-side code
+```bash
+npm run build     # production build
+npm run start     # serve the production build
+npm run typecheck # react-router typegen + tsc
 ```
 
-## Styling
+## How it works
 
-This template comes with [Tailwind CSS](https://tailwindcss.com/) already configured for a simple default starting experience. You can use whatever CSS framework you prefer.
+- **Data-driven.** Products, variants, pricing, badges, and the initial seed cart
+  all come from `data/db.json` — there is no per-product hardcoded markup. Step
+  config (titles/icons/order) and review categories live in `app/enums/`.
+- **Single source of truth.** All cart state lives in `BundleCartProvider`
+  (`app/context/bundle-cart-context.tsx`). The builder cards and the review
+  panel read and write the same selections, so steppers stay in sync.
+- **Per-variant quantities.** Selections are keyed by `(productId, variantId)`,
+  so Red and Blue of the same product are tracked independently. A card's stepper
+  is bound to the currently active variant; the review panel lists every variant
+  with quantity > 0 as its own line.
+- **Seed state.** On first load the cart is seeded (`seedSelections` in
+  `data/db.json`) so the app matches the design — two cameras selected plus the
+  pre-populated sensors, hub, accessory, and plan.
+- **Persistence.** "Save my system for later" writes the configuration to
+  `localStorage`; on reload it is restored exactly. Until you save, changes are
+  not persisted (matching the "save for later" intent). "Clear" / a fresh visit
+  with no saved system falls back to the seed.
+- **Pure logic.** Totals, savings, step counts, and review grouping are pure
+  functions in `app/lib/bundle/` (easy to read and test).
 
----
+## Decisions & tradeoffs
 
-Built with ❤️ using React Router.
+- **React Router v8 + TanStack Query** are kept from the project template. For a
+  static local catalog this is heavier than strictly necessary; Query is used
+  only for clean loading/error ergonomics around the bundled JSON. The data
+  itself is imported directly so a clean clone runs with just `npm run dev`.
+- **Approximate totals.** The seed reproduces the design's line items,
+  quantities, and active prices. The struck-through pre-discount total and the
+  savings figure are derived from the catalog's `compareAtPrice` values and are
+  internally consistent (struck − active = savings), so they may differ by a
+  few dollars from the spec's approximate "~$238.81 / ~$50.92".
+- **Checkout** is a placeholder: it shows an inline "Order placed ✓" confirmation,
+  with no real payment flow (as allowed by the brief).
+
+## Project structure
+
+```
+app/
+  components/bundle-builder/   builder accordion, product cards, review panel
+  context/                     cart state (single source of truth)
+  lib/bundle/                  pure logic: totals, grouping, seed, persistence
+  enums/                       step + review-category config
+  query/ query-client/         data access around data/db.json
+data/db.json                   product catalog + seed cart
+```

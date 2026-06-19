@@ -1,6 +1,6 @@
 import type { BuilderStepId } from "~/enums";
 import type { CartSelection, Product } from "~/types/catalog";
-import { getVariantUnitPrice, getVariantDisplayPrice } from "~/types/catalog";
+import { getVariantUnitPrice, getVariantComparePrice } from "~/types/catalog";
 
 export type CartTotals = {
   itemCount: number;
@@ -16,20 +16,6 @@ function findProduct(
   return products.find((product) => product.id === productId);
 }
 
-function getOriginalUnitPrice(
-  product: Product,
-  variantId: string | null,
-): number {
-  if (variantId) {
-    const variant = product.variants.find((item) => item.id === variantId);
-    if (variant) {
-      return variant.compareAtPrice ?? variant.price;
-    }
-  }
-
-  return product.compareAtPrice ?? getVariantDisplayPrice(product, variantId);
-}
-
 export function getSelectedCountForStep(
   stepId: BuilderStepId,
   selections: CartSelection[],
@@ -41,9 +27,18 @@ export function getSelectedCountForStep(
       .map((product) => product.id),
   );
 
-  return selections
-    .filter((selection) => stepProductIds.has(selection.productId))
-    .reduce((total, selection) => total + selection.quantity, 0);
+  // "N selected" reflects distinct products chosen in this step — a product
+  // counts once regardless of quantity or how many of its variants are added.
+  const selectedProductIds = new Set(
+    selections
+      .filter(
+        (selection) =>
+          selection.quantity > 0 && stepProductIds.has(selection.productId),
+      )
+      .map((selection) => selection.productId),
+  );
+
+  return selectedProductIds.size;
 }
 
 export function getCartTotals(
@@ -58,7 +53,7 @@ export function getCartTotals(
       }
 
       const unitPrice = getVariantUnitPrice(product, selection.variantId);
-      const originalUnitPrice = getOriginalUnitPrice(
+      const originalUnitPrice = getVariantComparePrice(
         product,
         selection.variantId,
       );

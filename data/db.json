@@ -55,7 +55,8 @@
           "imageUrl": "/images/products/wyze-cam-pan-v3-white.png",
           "price": 34.98,
           "compareAtPrice": 39.98,
-          "cartUnitPrice": 23.98
+          "cartUnitPrice": 23.99,
+          "cartCompareAtPrice": 28.99
         },
         {
           "id": "black",
@@ -64,7 +65,8 @@
           "imageUrl": "/images/products/wyze-cam-pan-v3-black.png",
           "price": 34.98,
           "compareAtPrice": 39.98,
-          "cartUnitPrice": 23.98
+          "cartUnitPrice": 23.99,
+          "cartCompareAtPrice": 28.99
         }
       ]
     },
@@ -198,5 +200,13 @@
       "price": 20.98,
       "compareAtPrice": null
     }
+  ],
+  "seedSelections": [
+    { "id": "wyze-cam-v4::white", "productId": "wyze-cam-v4", "variantId": "white", "quantity": 1 },
+    { "id": "wyze-cam-pan-v3::white", "productId": "wyze-cam-pan-v3", "variantId": "white", "quantity": 2 },
+    { "id": "wyze-sense-motion-sensor::default", "productId": "wyze-sense-motion-sensor", "variantId": null, "quantity": 2 },
+    { "id": "wyze-sense-hub::default", "productId": "wyze-sense-hub", "variantId": null, "quantity": 1 },
+    { "id": "wyze-microsd-card-256gb::default", "productId": "wyze-microsd-card-256gb", "variantId": null, "quantity": 2 },
+    { "id": "cam-unlimited::default", "productId": "cam-unlimited", "variantId": null, "quantity": 1 }
   ]
 }

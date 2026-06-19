@@ -16,6 +16,8 @@ export interface ProductVariant {
   compareAtPrice: number | null;
   /** When bundle pricing differs from card display price (e.g. Wyze Cam Pan v3). */
   cartUnitPrice?: number;
+  /** Pre-discount unit price for the review/cart line, when it differs from the card's compareAtPrice (bundle pricing). */
+  cartCompareAtPrice?: number;
 }
 
 export interface Product {
@@ -72,4 +74,21 @@ export function getVariantDisplayPrice(
   }
 
   return product.price ?? 0;
+}
+
+/** Pre-discount unit price for the review/cart line (prefers bundle compare). */
+export function getVariantComparePrice(
+  product: Product,
+  variantId: string | null,
+): number {
+  if (variantId) {
+    const variant = product.variants.find((item) => item.id === variantId);
+    if (variant) {
+      return (
+        variant.cartCompareAtPrice ?? variant.compareAtPrice ?? variant.price
+      );
+    }
+  }
+
+  return product.compareAtPrice ?? product.price ?? 0;
 }

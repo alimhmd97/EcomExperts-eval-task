@@ -10,8 +10,10 @@ type ReviewTotalsProps = {
 const FINANCING_MONTHS = 12;
 
 export function ReviewTotals({ totals }: ReviewTotalsProps) {
+  // Shipping is shown as its own line ("$5.99 → FREE"), so it stays out of the
+  // headline figures — this keeps strikeTotal − total equal to the savings line.
   const total = totals.subtotal + SHIPPING.price;
-  const originalTotal = totals.originalSubtotal + (SHIPPING.compareAtPrice ?? 0);
+  const originalTotal = totals.originalSubtotal;
   const monthly = total / FINANCING_MONTHS;
 
   return (

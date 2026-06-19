@@ -4,7 +4,11 @@ import type {
   Product,
   ProductVariant,
 } from "~/types/catalog";
-import { getVariantDisplayPrice, getVariantUnitPrice } from "~/types/catalog";
+import {
+  getVariantComparePrice,
+  getVariantDisplayPrice,
+  getVariantUnitPrice,
+} from "~/types/catalog";
 
 export type ReviewLine = {
   selectionId: string;
@@ -17,17 +21,6 @@ export type ReviewLine = {
   unitComparePrice: number;
   lineTotal: number;
 };
-
-function getUnitComparePrice(
-  product: Product,
-  variant: ProductVariant | null,
-): number {
-  if (variant) {
-    return variant.compareAtPrice ?? variant.price;
-  }
-
-  return product.compareAtPrice ?? product.price ?? 0;
-}
 
 export type ReviewGroup = {
   categoryId: ReviewCategoryId;
@@ -56,7 +49,7 @@ function toReviewLine(
     quantity: selection.quantity,
     unitDisplayPrice: getVariantDisplayPrice(product, selection.variantId),
     unitCartPrice,
-    unitComparePrice: getUnitComparePrice(product, variant),
+    unitComparePrice: getVariantComparePrice(product, selection.variantId),
     lineTotal: unitCartPrice * selection.quantity,
   };
 }
