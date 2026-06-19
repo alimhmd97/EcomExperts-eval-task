@@ -13,8 +13,21 @@ export type ReviewLine = {
   quantity: number;
   unitDisplayPrice: number;
   unitCartPrice: number;
+  /** Pre-discount unit price used for the struck-through "was" amount. */
+  unitComparePrice: number;
   lineTotal: number;
 };
+
+function getUnitComparePrice(
+  product: Product,
+  variant: ProductVariant | null,
+): number {
+  if (variant) {
+    return variant.compareAtPrice ?? variant.price;
+  }
+
+  return product.compareAtPrice ?? product.price ?? 0;
+}
 
 export type ReviewGroup = {
   categoryId: ReviewCategoryId;
@@ -43,6 +56,7 @@ function toReviewLine(
     quantity: selection.quantity,
     unitDisplayPrice: getVariantDisplayPrice(product, selection.variantId),
     unitCartPrice,
+    unitComparePrice: getUnitComparePrice(product, variant),
     lineTotal: unitCartPrice * selection.quantity,
   };
 }

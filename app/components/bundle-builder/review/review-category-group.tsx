@@ -12,11 +12,15 @@ export function ReviewCategoryGroup({
   lines,
 }: ReviewCategoryGroupProps) {
   return (
-    <section>
-      <h3>{categoryLabel}</h3>
-      {lines.map((line) => (
-        <ReviewLineItem key={line.selectionId} line={line} />
-      ))}
+    <section className="border-t border-border py-2">
+      <h3 className="pt-2 text-[11px] font-bold uppercase tracking-[0.12em] text-foreground-subtle">
+        {categoryLabel}
+      </h3>
+      <div className="divide-y divide-border/60">
+        {lines.map((line) => (
+          <ReviewLineItem key={line.selectionId} line={line} />
+        ))}
+      </div>
     </section>
   );
 }

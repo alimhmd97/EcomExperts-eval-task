@@ -1,15 +1,31 @@
-import { SHIPPING } from "~/enums";
+import { Truck } from "lucide-react";
 
-import { PriceDisplay } from "../shared/price-display";
+import { SHIPPING } from "~/enums";
+import { formatPrice } from "~/lib/format-price";
 
 export function ReviewShippingRow() {
+  const isFree = SHIPPING.price <= 0;
+  const showCompare =
+    SHIPPING.compareAtPrice != null && SHIPPING.compareAtPrice > SHIPPING.price;
+
   return (
-    <section className="flex items-center justify-between">
-      <span>{SHIPPING.name}</span>
-      <PriceDisplay
-        price={SHIPPING.price}
-        compareAtPrice={SHIPPING.compareAtPrice}
-      />
+    <section className="flex items-center gap-3 border-t border-border py-4">
+      <span className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
+        <Truck className="size-5" aria-hidden="true" />
+      </span>
+      <p className="flex-1 text-sm font-bold text-foreground">
+        {SHIPPING.name}
+      </p>
+      <div className="flex flex-col items-end leading-tight">
+        {showCompare ? (
+          <span className="text-xs font-semibold text-foreground-subtle line-through">
+            {formatPrice(SHIPPING.compareAtPrice as number)}
+          </span>
+        ) : null}
+        <span className="text-sm font-bold text-primary">
+          {isFree ? "FREE" : formatPrice(SHIPPING.price)}
+        </span>
+      </div>
     </section>
   );
 }

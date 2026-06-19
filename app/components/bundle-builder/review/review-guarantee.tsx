@@ -1,3 +1,10 @@
 export function ReviewGuarantee() {
-  return <p>Satisfaction guarantee lives here</p>;
+  return (
+    <img
+      src="/assets/images/Satisfaction Badge-05 1.png"
+      alt="100% Wyze satisfaction guarantee"
+      className="size-20 shrink-0 select-none"
+      draggable={false}
+    />
+  );
 }

@@ -6,16 +6,31 @@ type ReviewTotalsProps = {
   totals: CartTotals;
 };
 
+/** Months used for the "as low as" financing estimate. */
+const FINANCING_MONTHS = 12;
+
 export function ReviewTotals({ totals }: ReviewTotalsProps) {
   const total = totals.subtotal + SHIPPING.price;
+  const originalTotal = totals.originalSubtotal + (SHIPPING.compareAtPrice ?? 0);
+  const monthly = total / FINANCING_MONTHS;
 
   return (
-    <section>
-      <p>Subtotal: {formatPrice(totals.subtotal)}</p>
-      {totals.savings > 0 ? (
-        <p>You save: {formatPrice(totals.savings)}</p>
+    <div className="flex flex-col items-end gap-1.5">
+      {total > 0 ? (
+        <span className="rounded-full bg-primary px-3 py-1 text-xs font-bold text-primary-foreground">
+          as low as {formatPrice(monthly)}/mo
+        </span>
       ) : null}
-      <p>Total: {formatPrice(total)}</p>
-    </section>
+      <div className="flex items-baseline gap-2">
+        {originalTotal > total ? (
+          <span className="text-base font-semibold text-foreground-subtle line-through">
+            {formatPrice(originalTotal)}
+          </span>
+        ) : null}
+        <span className="text-2xl font-extrabold text-primary">
+          {formatPrice(total)}
+        </span>
+      </div>
+    </div>
   );
 }
