@@ -77,6 +77,9 @@ export function SelectionProductCard({ product }: SelectionProductCardProps) {
         <img
           src={imageUrl}
           alt={product.name}
+          onError={(event) => {
+            event.currentTarget.src = "/assets/images/camera.png";
+          }}
           className="max-h-[132px] w-auto max-w-full object-contain"
         />
       </div>

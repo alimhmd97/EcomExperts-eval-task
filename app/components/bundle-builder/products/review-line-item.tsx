@@ -77,6 +77,9 @@ export function ReviewLineItem({ line }: ReviewLineItemProps) {
         <img
           src={imageUrl}
           alt=""
+          onError={(event) => {
+            event.currentTarget.src = "/assets/images/camera.png";
+          }}
           className="max-h-9 w-auto max-w-9 object-contain"
         />
       </span>
