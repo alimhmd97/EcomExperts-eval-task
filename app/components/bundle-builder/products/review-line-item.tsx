@@ -5,8 +5,12 @@ export function ReviewLineItem() {
   return (
     <article>
       <p>Review line item lives here</p>
-      <QuantityStepper />
-      <PriceDisplay />
+      <QuantityStepper
+        value={0}
+        onChange={() => {}}
+        ariaLabel="Review item quantity"
+      />
+      <PriceDisplay price={0} />
     </article>
   );
 }

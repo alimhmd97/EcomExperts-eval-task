@@ -20,22 +20,26 @@ export function BuilderAccordion({
   );
 
   return (
-    <section className="divide-y divide-border border-y border-border bg-background">
+    <section className=" bg-background">
       {BUILDER_STEPS.map((step) => (
-        <BuilderStepSection
-          key={step.id}
-          step={step}
-          stepNumber={step.order}
-          totalSteps={BUILDER_STEPS.length}
-          products={getProductsForStep(step.id, products)}
-          selectedCount={0}
-          isOpen={step.id === activeStepId}
-          onToggle={() =>
-            setActiveStepId((current) =>
-              current === step.id ? null : step.id,
-            )
-          }
-        />
+        <div key={step.id}>
+          <span className="block px-5 pt-5 pb-2 text-[11px] font-bold uppercase tracking-[0.12em] text-foreground-subtle">
+            Step {step.order} of {BUILDER_STEPS.length}
+          </span>
+          <BuilderStepSection
+            step={step}
+            stepNumber={step.order}
+            totalSteps={BUILDER_STEPS.length}
+            products={getProductsForStep(step.id, products)}
+            selectedCount={0}
+            isOpen={step.id === activeStepId}
+            onToggle={() =>
+              setActiveStepId((current) =>
+                current === step.id ? null : step.id,
+              )
+            }
+          />
+        </div>
       ))}
     </section>
   );

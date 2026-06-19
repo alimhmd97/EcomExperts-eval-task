@@ -8,10 +8,9 @@ type BuilderProductGridProps = {
 
 export function BuilderProductGrid({ products }: BuilderProductGridProps) {
   return (
-    <section>
-      <p>Product grid lives here ({products.length} products)</p>
+    <section className="grid gap-4 sm:grid-cols-2">
       {products.map((product) => (
-        <SelectionProductCard key={product.id} productId={product.id} />
+        <SelectionProductCard key={product.id} product={product} />
       ))}
     </section>
   );

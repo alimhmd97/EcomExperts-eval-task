@@ -2,8 +2,6 @@ import type { BuilderStepId, ReviewCategoryId } from "~/enums";
 
 export type { ReviewCategoryId } from "~/enums";
 
-export type StepIcon = "camera" | "shield" | "sensor" | "grid";
-
 export interface ProductBadge {
   label: string;
   variant: "purple";

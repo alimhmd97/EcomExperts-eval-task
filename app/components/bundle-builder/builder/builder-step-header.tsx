@@ -1,4 +1,4 @@
-import { StepIcon } from "../shared/step-icon";
+import type { LucideIcon } from "lucide-react";
 
 type BuilderStepHeaderProps = {
   id: string;
@@ -6,7 +6,7 @@ type BuilderStepHeaderProps = {
   stepNumber: number;
   totalSteps: number;
   title: string;
-  icon: string;
+  icon: LucideIcon;
   selectedCount: number;
   isOpen: boolean;
   onToggle: () => void;
@@ -15,31 +15,29 @@ type BuilderStepHeaderProps = {
 export function BuilderStepHeader({
   id,
   panelId,
-  stepNumber,
-  totalSteps,
   title,
-  icon,
+  icon: Icon,
   selectedCount,
   isOpen,
   onToggle,
 }: BuilderStepHeaderProps) {
   return (
-    <h3 className="m-0">
+    <h3 className="m-0 border-y border-border">
       <button
         id={id}
         type="button"
         onClick={onToggle}
         aria-expanded={isOpen}
         aria-controls={panelId}
-        className="flex w-full items-center gap-4 px-5 py-6 text-left outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+        className="flex h-[88px] w-full items-center gap-4 px-5 text-left outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
       >
         <span className="flex flex-1 flex-col gap-1.5">
-          <span className="text-[11px] font-bold uppercase tracking-[0.12em] text-foreground-subtle">
-            Step {stepNumber} of {totalSteps}
-          </span>
+         
           <span className="flex items-center gap-2.5">
-            <StepIcon
-              icon={icon}
+            <Icon
+              size={22}
+              strokeWidth={1.75}
+              aria-hidden="true"
               className={isOpen ? "text-primary" : "text-foreground"}
             />
             <span className="text-lg font-bold text-foreground">{title}</span>

@@ -30,6 +30,7 @@ export function BuilderStepSection({
 
   return (
     <section>
+      
       <BuilderStepHeader
         id={headerId}
         panelId={panelId}
