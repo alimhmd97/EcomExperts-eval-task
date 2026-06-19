@@ -1,8 +1,9 @@
 import type { BuilderStepConfig } from "~/enums";
 import type { Product } from "~/types/catalog";
 
+import { Button } from "~/components/ui/button";
+
 import { BuilderProductGrid } from "./builder-product-grid";
-import { BuilderStepFooter } from "./builder-step-footer";
 import { BuilderStepHeader } from "./builder-step-header";
 
 type BuilderStepSectionProps = {
@@ -54,10 +55,13 @@ export function BuilderStepSection({
         <div className="min-h-0 overflow-hidden" inert={!isOpen}>
           <div className="px-5 pb-6">
             <BuilderProductGrid products={products} />
-            <BuilderStepFooter
-              nextStepLabel={step.nextStepLabel}
-              onNext={onNext}
-            />
+            {step.nextStepLabel ? (
+              <footer className="flex justify-center pt-4">
+                <Button variant="outline" onClick={onNext}>
+                  Next: {step.nextStepLabel}
+                </Button>
+              </footer>
+            ) : null}
           </div>
         </div>
       </div>

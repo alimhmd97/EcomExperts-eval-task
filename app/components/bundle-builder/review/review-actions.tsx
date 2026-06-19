@@ -1,5 +1,6 @@
 import { useState } from "react";
 
+import { Button } from "~/components/ui/button";
 import { useBundleCart } from "~/context/bundle-cart-context";
 
 export function ReviewActions() {
@@ -15,13 +16,14 @@ export function ReviewActions() {
 
   return (
     <footer className="flex flex-col items-center gap-4">
-      <button
-        type="button"
+      <Button
+        variant="solid"
+        size="lg"
+        className="w-full"
         onClick={() => setCheckedOut(true)}
-        className="w-full rounded-xl bg-primary px-6 py-4 text-base font-bold text-primary-foreground transition-colors hover:bg-primary/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
       >
         {checkedOut ? "Order placed ✓" : "Checkout"}
-      </button>
+      </Button>
       <button
         type="button"
         onClick={handleSave}
