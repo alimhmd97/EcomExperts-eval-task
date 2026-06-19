@@ -72,7 +72,37 @@ npm run typecheck # react-router typegen + tsc
 - **Checkout** is a placeholder: it shows an inline "Order placed ✓" confirmation,
   with no real payment flow (as allowed by the brief).
 
-## Project structure
+## Architecture
+
+Data flows one way: the catalog is loaded once, all mutable state lives in a
+single provider, and pure functions derive everything the UI renders. The
+builder *writes* selections and the review panel *reads* them — both through the
+same provider, which is what keeps steppers and the summary in sync.
+
+```
+data/db.json ──► query/ (TanStack) ──► BundleCartProvider ──► components
+                                              │  (single source of truth)
+                                              ▼
+                                       lib/bundle/ (pure: totals, grouping)
+                                              │
+                               ┌──────────────┴──────────────┐
+                          builder/ (write)             review/ (read)
+                          pick products              live "Your system" summary
+```
+
+### Component map
+
+Grouped by role rather than file order — the page splits into a *builder* side
+(user picks) and a *review* side (live summary), over a small shared layer.
+
+```
+bundle-builder-page
+├─ builder/    step accordion, product grid, product cards   ← user selects
+├─ review/     panel, category groups, totals, actions       ← live summary
+└─ shared/     price-display, quantity-stepper                ← used by both
+```
+
+### Project structure
 
 ```
 app/
