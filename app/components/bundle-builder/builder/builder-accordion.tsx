@@ -1,12 +1,20 @@
 import { useState } from "react";
 
+import {
+  Accordion,
+  AccordionItem,
+  AccordionPanel,
+  AccordionTrigger,
+} from "~/components/ui/accordion";
+import { Button } from "~/components/ui/button";
 import { useBundleCart } from "~/context/bundle-cart-context";
 import { BUILDER_STEPS, type BuilderStepId } from "~/enums";
 import { getSelectedCountForStep } from "~/lib/bundle/cart";
 import { getProductsForStep } from "~/lib/bundle/steps";
 import type { Product } from "~/types/catalog";
 
-import { BuilderStepSection } from "./builder-step";
+import { BuilderProductGrid } from "./builder-product-grid";
+import { BuilderStepHeader } from "./builder-step-header";
 
 type BuilderAccordionProps = {
   products: Product[];
@@ -23,42 +31,60 @@ export function BuilderAccordion({
   );
 
   return (
-    <section className=" bg-background">
+    <Accordion
+      value={activeStepId}
+      onValueChange={(id) => setActiveStepId(id as BuilderStepId | null)}
+      className="overflow-hidden rounded-3xl bg-background"
+    >
       {BUILDER_STEPS.map((step, index) => {
-        const isOpen = step.id === activeStepId;
         const nextStep = BUILDER_STEPS[index + 1] ?? null;
+        const isOpen = step.id === activeStepId;
 
         return (
-          <div
+          <AccordionItem
             key={step.id}
-            className={isOpen ? "bg-surface-soft" : undefined}
+            value={step.id}
+            className={({ isOpen }) => (isOpen ? "bg-surface-soft" : "")}
           >
             <span className="block px-5 pt-5 pb-2 text-[11px] font-bold uppercase tracking-[0.12em] text-foreground-subtle">
               Step {step.order} of {BUILDER_STEPS.length}
             </span>
-            <BuilderStepSection
-              step={step}
-              stepNumber={step.order}
-              totalSteps={BUILDER_STEPS.length}
-              products={getProductsForStep(step.id, products)}
-              selectedCount={getSelectedCountForStep(
-                step.id,
-                selections,
-                products,
-              )}
-              isOpen={isOpen}
-              onToggle={() =>
-                setActiveStepId((current) =>
-                  current === step.id ? null : step.id,
-                )
-              }
-              onNext={
-                nextStep ? () => setActiveStepId(nextStep.id) : undefined
-              }
-            />
-          </div>
+            <AccordionTrigger
+              headingLevel={3}
+              headingClassName={`border-border ${isOpen ? "border-t" : "border-y"}`}
+              className="flex h-[68px] w-full items-center gap-4 px-5 text-left outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+            >
+              <BuilderStepHeader
+                title={step.title}
+                icon={step.icon}
+                selectedCount={getSelectedCountForStep(
+                  step.id,
+                  selections,
+                  products,
+                )}
+                isOpen={isOpen}
+              />
+            </AccordionTrigger>
+            <AccordionPanel className="px-5 pb-6">
+              <BuilderProductGrid
+                products={getProductsForStep(step.id, products)}
+              />
+              {step.nextStepLabel ? (
+                <footer className="flex justify-center pt-4">
+                  <Button
+                    variant="outline"
+                    onClick={
+                      nextStep ? () => setActiveStepId(nextStep.id) : undefined
+                    }
+                  >
+                    Next: {step.nextStepLabel}
+                  </Button>
+                </footer>
+              ) : null}
+            </AccordionPanel>
+          </AccordionItem>
         );
       })}
-    </section>
+    </Accordion>
   );
 }

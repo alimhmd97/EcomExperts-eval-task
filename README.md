@@ -5,28 +5,53 @@ from the provided Figma design. Assemble a security system across four steps
 (cameras, plan, sensors, extra protection) and watch the "Your security system"
 summary recalculate as you go.
 
-## Run it
+## 🚀 How to run
 
 Requires **Node 22.22+** and npm.
 
+### 1. Install dependencies (run once)
+
 ```bash
 npm install
+```
+
+### 2. Start the app
+
+```bash
 npm run dev
 ```
 
-Open <http://localhost:5173>. The app is self-contained — the product catalog is
-a local JSON file (`data/db.json`) bundled at build time, so no backend is needed.
+👉 **Open <http://localhost:5173> in your browser.**
 
-### Optional: serve the catalog from an API (bonus)
+That's it — the app is self-contained. The product catalog is a local JSON file
+(`data/db.json`), so no backend is required.
 
-`data/db.json` can also be served over HTTP via JSON Server:
+---
+
+### Run the JSON server (API)
+
+`data/db.json` can also be served over HTTP via **JSON Server**. You have two ways:
+
+**A) API only** — in its own terminal:
 
 ```bash
-npm run api       # http://localhost:3001/products
-npm run dev:all   # API + web together
+npm run api
 ```
 
-This is a bonus only; the UI does not depend on it.
+👉 API runs at **<http://localhost:3001/products>**
+
+**B) API + app together** — one command, both processes:
+
+```bash
+npm run dev:all
+```
+
+👉 App at **<http://localhost:5173>** · API at **<http://localhost:3001/products>**
+
+> Note: the web app reads the bundled `data/db.json` directly, so it runs fine
+> without the API. The JSON server is the optional/bonus HTTP catalog.
+
+---
 
 ### Other scripts
 
@@ -99,13 +124,15 @@ Grouped by role rather than file order — the page splits into a *builder* side
 bundle-builder-page
 ├─ builder/    step accordion, product grid, product cards   ← user selects
 ├─ review/     panel, category groups, totals, actions       ← live summary
-└─ shared/     price-display, quantity-stepper                ← used by both
+├─ shared/     price-display, quantity-stepper                ← used by both
+└─ ui/         pure primitives: accordion, button            ← design-agnostic
 ```
 
 ### Project structure
 
 ```
 app/
+  components/ui/               pure, reusable primitives: accordion, button
   components/bundle-builder/   builder accordion, product cards, review panel
   context/                     cart state (single source of truth)
   lib/bundle/                  pure logic: totals, grouping, seed, persistence
