@@ -13,6 +13,7 @@ type BuilderStepSectionProps = {
   selectedCount: number;
   isOpen: boolean;
   onToggle: () => void;
+  onNext?: () => void;
 };
 
 export function BuilderStepSection({
@@ -23,6 +24,7 @@ export function BuilderStepSection({
   selectedCount,
   isOpen,
   onToggle,
+  onNext,
 }: BuilderStepSectionProps) {
   // Link accordion toggle to its panel for screen readers (aria-controls / aria-labelledby).
   const headerId = `step-header-${step.id}`;
@@ -52,7 +54,10 @@ export function BuilderStepSection({
         <div className="min-h-0 overflow-hidden" inert={!isOpen}>
           <div className="px-5 pb-6">
             <BuilderProductGrid products={products} />
-            <BuilderStepFooter nextStepLabel={step.nextStepLabel} />
+            <BuilderStepFooter
+              nextStepLabel={step.nextStepLabel}
+              onNext={onNext}
+            />
           </div>
         </div>
       </div>

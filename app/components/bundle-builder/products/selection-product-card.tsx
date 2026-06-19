@@ -1,5 +1,6 @@
-import { useMemo, useState } from "react";
+import { useState } from "react";
 
+import { useBundleCart } from "~/context/bundle-cart-context";
 import type { Product } from "~/types/catalog";
 import {
   getVariantDisplayPrice,
@@ -42,19 +43,15 @@ function getCompareAtPrice(
 }
 
 export function SelectionProductCard({ product }: SelectionProductCardProps) {
+  const { getQuantity, setQuantity, selections } = useBundleCart();
   const [activeVariantId, setActiveVariantId] = useState<string | null>(() =>
     getInitialVariantId(product),
   );
-  const [quantities, setQuantities] = useState<Record<string, number>>({});
 
-  const activeQuantity = useMemo(() => {
-    const key = activeVariantId ?? "default";
-    return quantities[key] ?? 0;
-  }, [activeVariantId, quantities]);
-
-  const isSelected = useMemo(
-    () => Object.values(quantities).some((quantity) => quantity > 0),
-    [quantities],
+  const activeQuantity = getQuantity(product.id, activeVariantId);
+  const isSelected = selections.some(
+    (selection) =>
+      selection.productId === product.id && selection.quantity > 0,
   );
 
   const displayPrice = getVariantDisplayPrice(product, activeVariantId);
@@ -65,11 +62,7 @@ export function SelectionProductCard({ product }: SelectionProductCardProps) {
   const imageUrl = activeVariant?.imageUrl ?? product.imageUrl;
 
   const handleQuantityChange = (nextValue: number) => {
-    const key = activeVariantId ?? "default";
-    setQuantities((current) => ({
-      ...current,
-      [key]: nextValue,
-    }));
+    setQuantity(product.id, activeVariantId, nextValue);
   };
 
   return (

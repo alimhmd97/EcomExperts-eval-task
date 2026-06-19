@@ -22,7 +22,9 @@ export function BuilderStepHeader({
   onToggle,
 }: BuilderStepHeaderProps) {
   return (
-    <h3 className="m-0 border-y border-border">
+    <h3
+      className={`m-0 border-border ${isOpen ? "border-t" : "border-y"}`}
+    >
       <button
         id={id}
         type="button"

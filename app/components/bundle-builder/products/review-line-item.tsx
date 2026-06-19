@@ -1,16 +1,31 @@
+import { useBundleCart } from "~/context/bundle-cart-context";
+import type { ReviewLine } from "~/lib/bundle/review-groups";
+
 import { PriceDisplay } from "../shared/price-display";
 import { QuantityStepper } from "../shared/quantity-stepper";
 
-export function ReviewLineItem() {
+type ReviewLineItemProps = {
+  line: ReviewLine;
+};
+
+export function ReviewLineItem({ line }: ReviewLineItemProps) {
+  const { setQuantity } = useBundleCart();
+  const { product, variant, quantity, unitDisplayPrice, lineTotal } = line;
+
   return (
     <article>
-      <p>Review line item lives here</p>
+      <p>
+        {product.name}
+        {variant ? ` — ${variant.label}` : ""}
+      </p>
       <QuantityStepper
-        value={0}
-        onChange={() => {}}
-        ariaLabel="Review item quantity"
+        value={quantity}
+        onChange={(nextValue) =>
+          setQuantity(product.id, variant?.id ?? null, nextValue)
+        }
+        ariaLabel={`${product.name} quantity`}
       />
-      <PriceDisplay price={0} />
+      <PriceDisplay price={quantity > 1 ? lineTotal : unitDisplayPrice} />
     </article>
   );
 }
