@@ -14,6 +14,10 @@
   /* Text */
   --color-foreground: #1f1f1f;
   --color-foreground-muted: #1f1f1fbf;
+  --color-foreground-subtle: #9aa1ad;
+
+  /* Lines */
+  --color-border: #e8eaee;
 }
 
 html,
