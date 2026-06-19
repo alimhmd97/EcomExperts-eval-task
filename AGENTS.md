@@ -23,10 +23,14 @@ A reference screenshot is available at `assets/c__Users_MDLA_AppData_Roaming_Cur
 ```bash
 npm install          # install dependencies
 npm run dev          # dev server at http://localhost:5173
+npm run api          # JSON Server at http://localhost:3001
+npm run dev:all      # API + frontend together
 npm run build        # production build
 npm run start        # serve production build
 npm run typecheck    # typegen + tsc
 ```
+
+Bundle catalog and seed cart live in [`data/db.json`](data/db.json). See [`data/README.md`](data/README.md) for API endpoints.
 
 Verify changes with `npm run typecheck` and `npm run build` before considering work complete.
 
@@ -38,6 +42,7 @@ app/                  # React Router app routes and UI
   root.tsx            # Root layout
   app.css             # Global styles / Tailwind
 public/               # Static assets (product images, icons)
+data/                 # db.json + JSON Server routes
 docs/                 # Evaluation spec and agent docs
 ```
 

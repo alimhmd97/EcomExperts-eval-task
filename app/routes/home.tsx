@@ -1,13 +1,16 @@
 import type { Route } from "./+types/home";
-import { Welcome } from "../welcome/welcome";
+import { BundleBuilderPage } from "~/components/bundle-builder/bundle-builder-page";
 
 export function meta({}: Route.MetaArgs) {
   return [
-    { title: "New React Router App" },
-    { name: "description", content: "Welcome to React Router!" },
+    { title: "Wyze Bundle Builder" },
+    {
+      name: "description",
+      content: "Build your Wyze security system bundle",
+    },
   ];
 }
 
 export default function Home() {
-  return <Welcome />;
+  return <BundleBuilderPage />;
 }
