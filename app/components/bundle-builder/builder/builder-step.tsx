@@ -1,13 +1,14 @@
-import type { BuilderStep } from "~/types/catalog";
+import type { BuilderStepConfig } from "~/enums";
+import type { Product } from "~/types/catalog";
 
 import { BuilderProductGrid } from "./builder-product-grid";
 import { BuilderStepFooter } from "./builder-step-footer";
 import { BuilderStepHeader } from "./builder-step-header";
 
 type BuilderStepSectionProps = {
-  step: BuilderStep;
+  step: BuilderStepConfig;
   stepNumber: number;
-  productCount: number;
+  products: Product[];
   selectedCount: number;
   isOpen: boolean;
 };
@@ -15,7 +16,7 @@ type BuilderStepSectionProps = {
 export function BuilderStepSection({
   step,
   stepNumber,
-  productCount,
+  products,
   selectedCount,
   isOpen,
 }: BuilderStepSectionProps) {
@@ -30,7 +31,7 @@ export function BuilderStepSection({
       />
       {isOpen ? (
         <>
-          <BuilderProductGrid productCount={productCount} />
+          <BuilderProductGrid products={products} />
           <BuilderStepFooter nextStepLabel={step.nextStepLabel} />
         </>
       ) : null}

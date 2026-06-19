@@ -1,12 +1,9 @@
-import type { BuilderStep, Product } from "~/types/catalog";
+import type { BuilderStepId } from "~/enums";
+import type { Product } from "~/types/catalog";
 
 export function getProductsForStep(
-  stepId: string,
+  stepId: BuilderStepId,
   products: Product[],
 ): Product[] {
   return products.filter((product) => product.stepId === stepId);
-}
-
-export function sortSteps(steps: BuilderStep[]): BuilderStep[] {
-  return [...steps].sort((a, b) => a.order - b.order);
 }

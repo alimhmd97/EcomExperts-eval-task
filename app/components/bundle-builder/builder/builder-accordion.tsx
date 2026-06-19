@@ -1,24 +1,24 @@
-import type { BuilderStep } from "~/types/catalog";
+import { BUILDER_STEPS, type BuilderStepId } from "~/enums";
+import { getProductsForStep } from "~/lib/bundle/steps";
+import type { Product } from "~/types/catalog";
 
 import { BuilderStepSection } from "./builder-step";
 
 type BuilderAccordionProps = {
-  steps: BuilderStep[];
-  openStepId: string;
+  products: Product[];
+  openStepId: BuilderStepId;
 };
 
-export function BuilderAccordion({ steps, openStepId }: BuilderAccordionProps) {
-  const sortedSteps = [...steps].sort((a, b) => a.order - b.order);
-
+export function BuilderAccordion({ products, openStepId }: BuilderAccordionProps) {
   return (
     <section>
       <p>Builder accordion lives here</p>
-      {sortedSteps.map((step) => (
+      {BUILDER_STEPS.map((step) => (
         <BuilderStepSection
           key={step.id}
           step={step}
           stepNumber={step.order}
-          productCount={2}
+          products={getProductsForStep(step.id, products)}
           selectedCount={0}
           isOpen={step.id === openStepId}
         />

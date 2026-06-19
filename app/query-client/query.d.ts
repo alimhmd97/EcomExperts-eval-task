@@ -1,4 +1,4 @@
 export type QueryKey = [
-  ("bundle" | "products" | "steps"),
+  ("bundle" | "products"),
   ...ReadonlyArray<unknown>,
 ];

@@ -1,4 +1,4 @@
-import type { ReviewCategoryId } from "~/enums";
+import type { BuilderStepId, ReviewCategoryId } from "~/enums";
 
 export type { ReviewCategoryId } from "~/enums";
 
@@ -22,7 +22,7 @@ export interface ProductVariant {
 
 export interface Product {
   id: string;
-  stepId: string;
+  stepId: BuilderStepId;
   category: ReviewCategoryId;
   name: string;
   description: string;
@@ -37,15 +37,6 @@ export interface Product {
   required?: boolean;
 }
 
-export interface BuilderStep {
-  id: string;
-  order: number;
-  title: string;
-  icon: StepIcon;
-  nextStepId: string | null;
-  nextStepLabel: string | null;
-}
-
 export interface CartSelection {
   id: string;
   productId: string;
@@ -54,7 +45,6 @@ export interface CartSelection {
 }
 
 export interface BundleDatabase {
-  steps: BuilderStep[];
   products: Product[];
 }
 

@@ -14,11 +14,10 @@ Runs at **http://localhost:3001**.
 
 | Method | Path | Description |
 |--------|------|-------------|
-| GET | `/steps` | Accordion steps (ordered) |
 | GET | `/products` | Full product catalog |
 | GET | `/products?stepId=cameras` | Products for a builder step |
 
-Static app config (review categories, shipping) lives in [`app/enums/`](../app/enums/).
+Accordion step config (titles, icons, order) lives in [`app/enums/builder-step.ts`](../app/enums/builder-step.ts). Review categories and shipping live in [`app/enums/`](../app/enums/).
 
 Cart state is client-side only (localStorage) — not served from this API.
 

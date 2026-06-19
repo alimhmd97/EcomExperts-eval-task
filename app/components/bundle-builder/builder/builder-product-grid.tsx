@@ -1,15 +1,17 @@
+import type { Product } from "~/types/catalog";
+
 import { SelectionProductCard } from "../products/selection-product-card";
 
 type BuilderProductGridProps = {
-  productCount: number;
+  products: Product[];
 };
 
-export function BuilderProductGrid({ productCount }: BuilderProductGridProps) {
+export function BuilderProductGrid({ products }: BuilderProductGridProps) {
   return (
     <section>
-      <p>Product grid lives here ({productCount} products)</p>
-      {Array.from({ length: productCount }, (_, index) => (
-        <SelectionProductCard key={index} />
+      <p>Product grid lives here ({products.length} products)</p>
+      {products.map((product) => (
+        <SelectionProductCard key={product.id} productId={product.id} />
       ))}
     </section>
   );
