@@ -27,3 +27,17 @@ html,
 body {
   @apply bg-background font-sans font-semibold text-foreground antialiased;
 }
+
+/* Scale up text-* utilities used inside the review panel once the layout
+   hits the builder breakpoint, without editing every element by hand. */
+@media (min-width: 108.4375rem) {
+  .review-panel {
+    --text-xs: 1rem;
+    --text-sm: 1.25rem;
+    --text-base: 1.5rem;
+    --text-lg: 1.75rem;
+    --text-xl: 2rem;
+    --text-2xl: 2.5rem;
+    --text-4xl: 4rem;
+  }
+}

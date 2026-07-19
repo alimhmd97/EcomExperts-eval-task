@@ -22,7 +22,7 @@ export function ReviewPanel({ products }: ReviewPanelProps) {
   const isEmpty = groups.length === 0;
 
   return (
-    <aside className="flex flex-col rounded-3xl bg-surface-soft p-6 builder:flex-row builder:items-start builder:gap-15 builder:p-15">
+    <aside className="review-panel flex flex-col rounded-3xl bg-surface-soft p-6 builder:flex-row builder:items-start builder:gap-15 builder:p-15">
       <div className="builder:min-w-0 builder:flex-1">
         <header className="pb-4">
           <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-foreground-subtle builder:hidden">
