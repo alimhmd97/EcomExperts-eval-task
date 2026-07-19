@@ -52,7 +52,7 @@ export function ReviewPanel({ products }: ReviewPanelProps) {
 
       <ReviewShippingRow />
 
-      <div className="mt-2 flex items-center justify-between gap-4 border-t border-border pt-5">
+      <div className="mt-2 flex items-center justify-between gap-4 pt-5">
         <ReviewGuarantee />
         <ReviewTotals totals={totals} />
       </div>

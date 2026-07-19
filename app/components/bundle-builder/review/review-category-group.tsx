@@ -13,7 +13,7 @@ export function ReviewCategoryGroup({
 }: ReviewCategoryGroupProps) {
   return (
     <section className="border-t border-border py-2">
-      <h3 className="pt-2 text-[11px] font-bold uppercase tracking-[0.12em] text-foreground-subtle">
+      <h3 className="pt-2 text-[11px] font-medium uppercase tracking-[0.12em] text-foreground-subtle">
         {categoryLabel}
       </h3>
       <div className="divide-y divide-border/60">

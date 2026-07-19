@@ -76,7 +76,7 @@ export function ReviewLineItem({ line }: ReviewLineItemProps) {
   }
 
   return (
-    <article className="flex items-center gap-3 py-3">
+    <article className="flex items-center gap-3 py-3 border-none">
       <span className="flex size-11 shrink-0 items-center justify-center overflow-hidden rounded-xl bg-background">
         <img
           src={imageUrl}
