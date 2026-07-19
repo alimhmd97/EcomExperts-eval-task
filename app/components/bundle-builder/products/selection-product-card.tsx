@@ -2,9 +2,7 @@ import { useState } from "react";
 
 import { useBundleCart } from "~/context/bundle-cart-context";
 import type { Product } from "~/types/catalog";
-import {
-  getVariantDisplayPrice,
-} from "~/types/catalog";
+import { getVariantDisplayPrice } from "~/types/catalog";
 
 import { PriceDisplay } from "../shared/price-display";
 import { QuantityStepper } from "../shared/quantity-stepper";
@@ -56,10 +54,6 @@ export function SelectionProductCard({ product }: SelectionProductCardProps) {
 
   const displayPrice = getVariantDisplayPrice(product, activeVariantId);
   const compareAtPrice = getCompareAtPrice(product, activeVariantId);
-  const activeVariant = activeVariantId
-    ? product.variants.find((variant) => variant.id === activeVariantId)
-    : undefined;
-  const imageUrl =  product.imageUrl;
 
   const handleQuantityChange = (nextValue: number) => {
     setQuantity(product.id, activeVariantId, nextValue);
@@ -67,20 +61,20 @@ export function SelectionProductCard({ product }: SelectionProductCardProps) {
 
   return (
     <article
-      className={`relative flex h-full flex-col overflow-hidden rounded-2xl border bg-background p-5 shadow-[0_1px_3px_rgba(0,0,0,0.06)] transition-colors ${
+      className={`relative flex h-full gap-4 overflow-hidden rounded-2xl border bg-background p-5 shadow-[0_1px_3px_rgba(0,0,0,0.06)] transition-colors builder:flex-col builder:gap-0 ${
         isSelected ? "border-primary" : "border-border"
       }`}
     >
       {product.badge ? <ProductBadge badge={product.badge} /> : null}
 
-      <div className="mb-4 flex min-h-[148px] items-center justify-center px-2 pt-2">
+      <div className="flex size-24 shrink-0 items-center justify-center builder:mb-4 builder:min-h-[148px] builder:w-full builder:px-2 builder:pt-2">
         <img
-          src={imageUrl}
+          src={product.imageUrl}
           alt={product.name}
           onError={(event) => {
             event.currentTarget.src = "/assets/images/camera1.png";
           }}
-          className="max-h-[132px] w-auto max-w-full object-contain"
+          className="max-h-20 w-auto max-w-full object-contain builder:max-h-[132px]"
         />
       </div>
 

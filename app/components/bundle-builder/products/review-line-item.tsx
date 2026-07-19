@@ -8,7 +8,6 @@ type ReviewLineItemProps = {
   line: ReviewLine;
 };
 
-/** Stacked "was" / "now" price, right-aligned, matching the review panel. */
 function LinePrice({
   comparePrice,
   finalPrice,

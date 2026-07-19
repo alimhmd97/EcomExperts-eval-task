@@ -47,7 +47,7 @@ export function BundleBuilderPage() {
               openStepId={BuilderStepId.Cameras}
             />
           </div>
-          <div className="lg:sticky lg:bottom-8 lg:self-end builder:sticky builder:bottom-8 builder:w-full">
+          <div className="lg:sticky lg:bottom-8 lg:self-end builder:static builder:w-full">
             <ReviewPanel products={products} />
           </div>
         </div>
