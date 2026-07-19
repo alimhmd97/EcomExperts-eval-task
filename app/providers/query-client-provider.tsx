@@ -1,6 +1,6 @@
 import { QueryClientProvider as TanstackQueryClientProvider } from "@tanstack/react-query";
 
-import { getQueryClient } from "~/query-client";
+import { getQueryClient } from "~/query/get-query-client";
 
 export function QueryClientProvider({
   children,

@@ -1,4 +1,4 @@
-import type { ReviewLine } from "~/lib/bundle/review-groups";
+import type { ReviewLine } from "~/utils/bundle/review-groups";
 
 import { ReviewLineItem } from "../products/review-line-item";
 

@@ -1,5 +1,5 @@
 import { SHIPPING } from "~/enums";
-import { formatPrice } from "~/lib/format-price";
+import { formatPrice } from "~/utils/format-price";
 
 export function ReviewShippingRow() {
   const isFree = SHIPPING.price <= 0;

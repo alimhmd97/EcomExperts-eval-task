@@ -1,4 +1,4 @@
-import { formatPrice } from "~/lib/format-price";
+import { formatPrice } from "~/utils/format-price";
 
 type PriceDisplayProps = {
   price: number;

@@ -1,8 +1,11 @@
 import { useState } from "react";
 
 import { useBundleCart } from "~/context/bundle-cart-context";
+import {
+  getVariantDisplayComparePrice,
+  getVariantDisplayPrice,
+} from "~/utils/bundle/pricing";
 import type { Product } from "~/types/catalog";
-import { getVariantDisplayPrice } from "~/types/catalog";
 
 import { PriceDisplay } from "../shared/price-display";
 import { QuantityStepper } from "../shared/quantity-stepper";
@@ -28,18 +31,6 @@ function getInitialVariantId(product: Product): string | null {
   return product.variants[0]?.id ?? null;
 }
 
-function getCompareAtPrice(
-  product: Product,
-  variantId: string | null,
-): number | null {
-  if (variantId) {
-    const variant = product.variants.find((item) => item.id === variantId);
-    return variant?.compareAtPrice ?? null;
-  }
-
-  return product.compareAtPrice ?? null;
-}
-
 export function SelectionProductCard({ product }: SelectionProductCardProps) {
   const { getQuantity, setQuantity, selections } = useBundleCart();
   const [activeVariantId, setActiveVariantId] = useState<string | null>(() =>
@@ -53,7 +44,7 @@ export function SelectionProductCard({ product }: SelectionProductCardProps) {
   );
 
   const displayPrice = getVariantDisplayPrice(product, activeVariantId);
-  const compareAtPrice = getCompareAtPrice(product, activeVariantId);
+  const compareAtPrice = getVariantDisplayComparePrice(product, activeVariantId);
 
   const handleQuantityChange = (nextValue: number) => {
     setQuantity(product.id, activeVariantId, nextValue);
@@ -84,17 +75,16 @@ export function SelectionProductCard({ product }: SelectionProductCardProps) {
             {product.name}
           </h4>
           <p className="text-sm font-medium leading-snug text-foreground-muted [overflow-wrap:anywhere]">
-            {product.description}
-          {"  "}
-          <a
-            href={product.learnMoreUrl}
-            target="_blank"
-            rel="noreferrer"
-            className="inline-block text-sm font-semibold text-primary underline underline-offset-2"
-          >
-            Learn More
-          </a> 
-           </p>
+            {product.description}{" "}
+            <a
+              href={product.learnMoreUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-block text-sm font-semibold text-primary underline underline-offset-2"
+            >
+              Learn More
+            </a>
+          </p>
         </div>
 
         {product.variants.length > 0 && activeVariantId ? (

@@ -1,6 +1,6 @@
 import { useBundleCart } from "~/context/bundle-cart-context";
-import type { ReviewLine } from "~/lib/bundle/review-groups";
-import { formatPrice } from "~/lib/format-price";
+import type { ReviewLine } from "~/utils/bundle/review-groups";
+import { formatPrice } from "~/utils/format-price";
 
 import { QuantityStepper } from "../shared/quantity-stepper";
 

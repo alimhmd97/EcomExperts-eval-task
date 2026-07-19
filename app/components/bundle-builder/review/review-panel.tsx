@@ -1,7 +1,7 @@
 import { useBundleCart } from "~/context/bundle-cart-context";
-import { getCartTotals } from "~/lib/bundle/cart";
-import { formatPrice } from "~/lib/format-price";
-import { groupCartLinesByCategory } from "~/lib/bundle/review-groups";
+import { getCartTotals } from "~/utils/bundle/cart";
+import { formatPrice } from "~/utils/format-price";
+import { groupCartLinesByCategory } from "~/utils/bundle/review-groups";
 import type { Product } from "~/types/catalog";
 
 import { ReviewActions } from "./review-actions";

@@ -9,8 +9,8 @@ import {
 import { Button } from "~/components/ui/button";
 import { useBundleCart } from "~/context/bundle-cart-context";
 import { BUILDER_STEPS, type BuilderStepId } from "~/enums";
-import { getSelectedCountForStep } from "~/lib/bundle/cart";
-import { getProductsForStep } from "~/lib/bundle/steps";
+import { getSelectedCountForStep } from "~/utils/bundle/cart";
+import { getProductsForStep } from "~/utils/bundle/steps";
 import type { Product } from "~/types/catalog";
 
 import { BuilderProductGrid } from "./builder-product-grid";

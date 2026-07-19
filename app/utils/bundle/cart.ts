@@ -1,6 +1,7 @@
 import type { BuilderStepId } from "~/enums";
 import type { CartSelection, Product } from "~/types/catalog";
-import { getVariantUnitPrice, getVariantComparePrice } from "~/types/catalog";
+
+import { getVariantComparePrice, getVariantUnitPrice } from "./pricing";
 
 export type CartTotals = {
   itemCount: number;

@@ -4,11 +4,12 @@ import type {
   Product,
   ProductVariant,
 } from "~/types/catalog";
+
 import {
   getVariantComparePrice,
   getVariantDisplayPrice,
   getVariantUnitPrice,
-} from "~/types/catalog";
+} from "./pricing";
 
 export type ReviewLine = {
   selectionId: string;

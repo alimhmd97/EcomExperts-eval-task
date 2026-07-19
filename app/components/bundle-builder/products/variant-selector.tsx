@@ -39,11 +39,6 @@ export function VariantSelector({
                 : "border-border bg-background text-foreground hover:border-foreground-subtle"
             }`}
           >
-            {/* <span
-              className="size-4 shrink-0 rounded-full border border-border"
-              style={{ backgroundColor: variant.swatchColor }}
-              aria-hidden="true"
-            /> */}
             <img
               src={variant.imageUrl}
               alt={variant.label}

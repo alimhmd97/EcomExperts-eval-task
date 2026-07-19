@@ -1,6 +1,6 @@
 import { SHIPPING } from "~/enums";
-import type { CartTotals } from "~/lib/bundle/cart";
-import { formatPrice } from "~/lib/format-price";
+import type { CartTotals } from "~/utils/bundle/cart";
+import { formatPrice } from "~/utils/format-price";
 
 type ReviewTotalsProps = {
   totals: CartTotals;

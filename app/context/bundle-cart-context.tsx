@@ -11,8 +11,8 @@ import {
 import {
   loadCartFromStorage,
   saveCartToStorage,
-} from "~/lib/bundle/persistence";
-import { seedSelections } from "~/lib/bundle/seed";
+} from "~/lib/persistence";
+import { seedSelections } from "~/utils/bundle/seed";
 import type { CartSelection } from "~/types/catalog";
 
 type BundleCartContextValue = {
