@@ -52,7 +52,7 @@ export function SelectionProductCard({ product }: SelectionProductCardProps) {
 
   return (
     <article
-      className={`relative flex h-full min-w-[420px] items-center gap-4 overflow-hidden rounded-2xl border bg-background p-7 shadow-[0_1px_3px_rgba(0,0,0,0.06)] transition-colors builder:items-stretch builder:flex-col builder:gap-0 ${
+      className={`relative flex h-full min-w-[420px] items-center gap-4 overflow-hidden rounded-2xl border bg-background p-7 shadow-[0_1px_3px_rgba(0,0,0,0.06)] transition-colors builder:min-w-[300px] builder:items-stretch builder:flex-col builder:gap-0 ${
         isSelected ? "border-primary" : "border-border"
       }`}
     >
