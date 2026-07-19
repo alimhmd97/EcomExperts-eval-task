@@ -19,7 +19,7 @@ export function VariantSelector({
 
   return (
     <div
-      className="flex flex-wrap gap-2"
+      className="flex flex-wrap gap-1"
       role="radiogroup"
       aria-label={`${productName} color`}
     >
@@ -33,7 +33,7 @@ export function VariantSelector({
             role="radio"
             aria-checked={isActive}
             onClick={() => onSelect(variant.id)}
-            className={`inline-flex items-center gap-2 rounded-lg border px-3 py-1.5 text-sm font-semibold transition-colors ${
+            className={`inline-flex items-center gap-2 rounded-lg border px-1 py-1.5 text-sm font-medium transition-colors ${
               isActive
                 ? "border-primary bg-primary/5 text-foreground"
                 : "border-border bg-background text-foreground hover:border-foreground-subtle"
@@ -47,7 +47,7 @@ export function VariantSelector({
             <img
               src={variant.imageUrl}
               alt={variant.label}
-              className="size-4 shrink-0"
+              className="size-5 shrink-0"
             />
             {variant.label}
           </button>

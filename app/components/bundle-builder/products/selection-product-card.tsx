@@ -67,7 +67,7 @@ export function SelectionProductCard({ product }: SelectionProductCardProps) {
     >
       {product.badge ? <ProductBadge badge={product.badge} /> : null}
 
-      <div className="flex size-36 shrink-0 items-center justify-center builder:mb-4 builder:min-h-[148px] builder:w-full builder:px-2 builder:pt-2">
+      <div className="flex h-36 w-1/3 shrink-0 items-center justify-center builder:mb-4 builder:min-h-[148px] builder:w-full builder:px-2 builder:pt-2">
         <img
           src={product.imageUrl}
           alt={product.name}
@@ -85,7 +85,7 @@ export function SelectionProductCard({ product }: SelectionProductCardProps) {
           </h4>
           <p className="text-sm font-medium leading-snug text-foreground-muted [overflow-wrap:anywhere]">
             {product.description}
-          </p>
+          {"  "}
           <a
             href={product.learnMoreUrl}
             target="_blank"
@@ -93,7 +93,8 @@ export function SelectionProductCard({ product }: SelectionProductCardProps) {
             className="inline-block text-sm font-semibold text-primary underline underline-offset-2"
           >
             Learn More
-          </a>
+          </a> 
+           </p>
         </div>
 
         {product.variants.length > 0 && activeVariantId ? (
