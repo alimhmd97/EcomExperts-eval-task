@@ -1,5 +1,3 @@
-import { Truck } from "lucide-react";
-
 import { SHIPPING } from "~/enums";
 import { formatPrice } from "~/lib/format-price";
 
@@ -10,8 +8,13 @@ export function ReviewShippingRow() {
 
   return (
     <section className="flex items-center gap-3 border-t border-border py-4">
-      <span className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
-        <Truck className="size-5" aria-hidden="true" />
+      <span className="flex size-11 shrink-0 items-center justify-center overflow-hidden rounded-xl bg-background">
+        <img
+          src="/assets/images/fast-shiping.png"
+          alt=""
+          aria-hidden="true"
+          className="max-h-9 w-auto max-w-9 object-contain"
+        />
       </span>
       <p className="flex-1 text-sm font-bold text-foreground">
         {SHIPPING.name}

@@ -59,7 +59,7 @@ export function SelectionProductCard({ product }: SelectionProductCardProps) {
   const activeVariant = activeVariantId
     ? product.variants.find((variant) => variant.id === activeVariantId)
     : undefined;
-  const imageUrl = activeVariant?.imageUrl ?? product.imageUrl;
+  const imageUrl =  product.imageUrl;
 
   const handleQuantityChange = (nextValue: number) => {
     setQuantity(product.id, activeVariantId, nextValue);
@@ -78,7 +78,7 @@ export function SelectionProductCard({ product }: SelectionProductCardProps) {
           src={imageUrl}
           alt={product.name}
           onError={(event) => {
-            event.currentTarget.src = "/assets/images/camera.png";
+            event.currentTarget.src = "/assets/images/camera1.png";
           }}
           className="max-h-[132px] w-auto max-w-full object-contain"
         />

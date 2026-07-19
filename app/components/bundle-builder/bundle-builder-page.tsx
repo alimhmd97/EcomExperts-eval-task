@@ -36,6 +36,9 @@ export function BundleBuilderPage() {
   return (
     <BundleCartProvider>
       <main className="mx-auto max-w-7xl px-4 py-8 builder:max-w-none builder:px-10">
+        <h1 className="mb-6 text-3xl font-extrabold text-foreground lg:hidden">
+          Let&rsquo;s get started!
+        </h1>
 
         <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_min(24rem,100%)] lg:items-start builder:flex builder:flex-col">
           <div className="builder:w-full">

@@ -1,5 +1,3 @@
-import { ShieldCheck } from "lucide-react";
-
 import { useBundleCart } from "~/context/bundle-cart-context";
 import type { ReviewLine } from "~/lib/bundle/review-groups";
 import { formatPrice } from "~/lib/format-price";
@@ -56,8 +54,15 @@ export function ReviewLineItem({ line }: ReviewLineItemProps) {
   if (product.billingInterval === "month") {
     return (
       <article className="flex items-center gap-3 py-3">
-        <span className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
-          <ShieldCheck className="size-5" aria-hidden="true" />
+        <span className="flex size-11 shrink-0 items-center justify-center overflow-hidden rounded-xl ">
+          <img
+            src={product.imageUrl}
+            alt=""
+            onError={(event) => {
+              event.currentTarget.src = "/assets/images/camera1.png";
+            }}
+            className="max-h-9 w-auto max-w-9 object-contain"
+          />
         </span>
         <p className="flex-1 text-sm font-bold text-foreground">
           {product.name}
@@ -78,7 +83,7 @@ export function ReviewLineItem({ line }: ReviewLineItemProps) {
           src={imageUrl}
           alt=""
           onError={(event) => {
-            event.currentTarget.src = "/assets/images/camera.png";
+            event.currentTarget.src = "/assets/images/camera1.png";
           }}
           className="max-h-9 w-auto max-w-9 object-contain"
         />

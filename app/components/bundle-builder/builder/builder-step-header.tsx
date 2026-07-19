@@ -1,8 +1,6 @@
-import type { LucideIcon } from "lucide-react";
-
 type BuilderStepHeaderProps = {
   title: string;
-  icon: LucideIcon;
+  icon: string;
   selectedCount: number;
   isOpen: boolean;
 };
@@ -13,26 +11,24 @@ type BuilderStepHeaderProps = {
  */
 export function BuilderStepHeader({
   title,
-  icon: Icon,
+  icon,
   selectedCount,
   isOpen,
 }: BuilderStepHeaderProps) {
   return (
-    <span className="flex flex-1 flex-col gap-1.5">
-      <span className="flex items-center gap-2.5">
-        <Icon
-          size={22}
-          strokeWidth={1.75}
-          aria-hidden="true"
-          className={isOpen ? "text-primary" : "text-foreground"}
-        />
-        <span className="text-lg font-bold text-foreground">{title}</span>
-        {selectedCount > 0 ? (
-          <span className="ml-1 inline-flex min-w-5 items-center justify-center rounded-full bg-surface-soft px-1.5 text-xs font-bold text-primary">
-            {selectedCount}
-          </span>
-        ) : null}
-      </span>
+    <span className="flex flex-1 items-center gap-2.5">
+      <img
+        src={icon}
+        alt=""
+        aria-hidden="true"
+        className={`size-[22px] shrink-0 object-contain ${isOpen ? "opacity-100" : "opacity-80"}`}
+      />
+      <span className="text-lg font-bold text-foreground">{title}</span>
+      {selectedCount > 0 ? (
+        <span className="ml-auto text-sm font-bold text-primary">
+          {selectedCount} selected
+        </span>
+      ) : null}
     </span>
   );
 }

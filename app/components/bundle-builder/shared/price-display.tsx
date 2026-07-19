@@ -17,11 +17,14 @@ export function PriceDisplay({
   return (
     <div className={`flex items-baseline gap-1.5 ${className}`}>
       {hasDiscount ? (
-        <span className="text-sm font-semibold text-[#e03131] line-through">
+        <span className="text-sm font-semibold text-foreground-subtle line-through">
+          <span className="mr-1 no-underline">was</span>
           {formatPrice(compareAtPrice)}
         </span>
       ) : null}
-      <span className="text-base font-bold text-foreground">
+      <span
+        className={`text-base font-bold ${hasDiscount ? "text-primary" : "text-foreground"}`}
+      >
         {formatPrice(price)}
       </span>
     </div>
