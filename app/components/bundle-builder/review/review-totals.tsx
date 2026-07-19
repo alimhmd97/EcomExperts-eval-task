@@ -18,7 +18,7 @@ export function ReviewTotals({ totals }: ReviewTotalsProps) {
   const monthly = total / FINANCING_MONTHS;
 
   return (
-    <div className="flex flex-col items-end gap-1.5">
+    <div className="flex flex-col items-end gap-1.5 builder:w-full builder:flex-row builder:items-baseline builder:justify-between builder:gap-2">
       {total > 0 ? (
         <span className="rounded-full bg-primary px-3 py-1 text-xs font-bold text-primary-foreground">
           as low as {formatPrice(monthly)}/mo

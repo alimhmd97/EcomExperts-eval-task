@@ -22,51 +22,55 @@ export function ReviewPanel({ products }: ReviewPanelProps) {
   const isEmpty = groups.length === 0;
 
   return (
-    <aside className="rounded-3xl bg-surface-soft p-6">
-      <header className="pb-4">
-        <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-foreground-subtle">
-          Review
-        </p>
-        <h2 className="mt-1 text-2xl font-extrabold text-foreground">
-          Your security system
-        </h2>
-        <p className="mt-1 text-sm font-medium text-foreground-muted">
-          Review your personalized protection system designed to keep what
-          matters most safe.
-        </p>
-      </header>
+    <aside className="flex flex-col rounded-3xl bg-surface-soft p-6 builder:flex-row builder:items-start builder:gap-15 builder:p-15">
+      <div className="builder:min-w-0 builder:flex-1">
+        <header className="pb-4">
+          <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-foreground-subtle builder:hidden">
+            Review
+          </p>
+          <h2 className="mt-1 text-2xl font-extrabold text-foreground">
+            Your security system
+          </h2>
+          <p className="mt-1 text-sm font-medium text-foreground-muted">
+            Review your personalized protection system designed to keep what
+            matters most safe.
+          </p>
+        </header>
 
-      {isEmpty ? (
-        <p className="border-t border-border py-10 text-center text-sm font-medium text-foreground-muted">
-          No items selected yet. Start building your system to see it here.
-        </p>
-      ) : (
-        groups.map((group) => (
-          <ReviewCategoryGroup
-            key={group.categoryId}
-            categoryLabel={group.label}
-            lines={group.lines}
-          />
-        ))
-      )}
+        {isEmpty ? (
+          <p className="border-t border-border py-10 text-center text-sm font-medium text-foreground-muted">
+            No items selected yet. Start building your system to see it here.
+          </p>
+        ) : (
+          groups.map((group) => (
+            <ReviewCategoryGroup
+              key={group.categoryId}
+              categoryLabel={group.label}
+              lines={group.lines}
+            />
+          ))
+        )}
 
-      <ReviewShippingRow />
-
-      <div className="mt-2 flex items-center justify-between gap-4 pt-5">
-        <ReviewGuarantee />
-        <ReviewTotals totals={totals} />
+        <ReviewShippingRow />
       </div>
 
-      {totals.savings > 0 ? (
-        <p className="py-4 text-center text-sm font-bold text-[#16a34a]">
-          Congrats! You&apos;re saving {formatPrice(totals.savings)} on your
-          security bundle!
-        </p>
-      ) : (
-        <div className="py-3" />
-      )}
+      <div className="builder:min-w-0 builder:flex-1">
+        <div className="mt-2 flex items-center justify-between gap-4 pt-5 builder:mt-0 builder:flex-col builder:items-stretch builder:pt-0">
+          <ReviewGuarantee />
+          <ReviewTotals totals={totals} />
+        </div>
 
-      <ReviewActions />
+        {totals.savings > 0 ? (
+          <p className="py-4 text-center text-sm font-bold text-[#16a34a]">
+            Congrats! You&apos;re saving {formatPrice(totals.savings)} on
+            your security bundle!
+          </p>
+        ) : (
+          <div className="py-3" />
+        )}
+
+        <ReviewActions />
+      </div>
     </aside>
   );
 }
