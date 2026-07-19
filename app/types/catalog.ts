@@ -1,6 +1,6 @@
-import type { BuilderStepId, ReviewCategoryId } from "~/enums";
+import type { BuilderStepId, ReviewCategoryId } from "~/config";
 
-export type { ReviewCategoryId } from "~/enums";
+export type { ReviewCategoryId } from "~/config";
 
 export interface ProductBadge {
   label: string;

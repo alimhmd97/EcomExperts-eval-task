@@ -1,4 +1,4 @@
-import type { BuilderStepId } from "~/enums";
+import type { BuilderStepId } from "~/config";
 import type { Product } from "~/types/catalog";
 
 export function getProductsForStep(

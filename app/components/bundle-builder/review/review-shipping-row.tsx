@@ -1,5 +1,11 @@
-import { SHIPPING } from "~/enums";
 import { formatPrice } from "~/utils/format-price";
+
+export const SHIPPING = {
+  name: "Fast Shipping",
+  icon: "truck" as const,
+  price: 0,
+  compareAtPrice: 5.99,
+} as const;
 
 export function ReviewShippingRow() {
   const isFree = SHIPPING.price <= 0;

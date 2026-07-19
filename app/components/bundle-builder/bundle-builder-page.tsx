@@ -1,7 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 
 import { BundleCartProvider } from "~/context/bundle-cart-context";
-import { BuilderStepId } from "~/enums";
 import { getProductsQuery } from "~/query/bundle";
 
 import { BuilderAccordion } from "./builder/builder-accordion";
@@ -44,7 +43,7 @@ export function BundleBuilderPage() {
           <div className="builder:w-full">
             <BuilderAccordion
               products={products}
-              openStepId={BuilderStepId.Cameras}
+              openStepId="cameras"
             />
           </div>
           <div className="lg:sticky lg:bottom-8 lg:self-end builder:static builder:w-full">

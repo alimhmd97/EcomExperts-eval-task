@@ -1,4 +1,4 @@
-import { REVIEW_CATEGORIES, type ReviewCategoryId } from "~/enums";
+import { REVIEW_CATEGORIES, type ReviewCategoryId } from "~/config";
 import type {
   CartSelection,
   Product,

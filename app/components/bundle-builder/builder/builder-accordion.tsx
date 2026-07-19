@@ -8,7 +8,7 @@ import {
 } from "~/components/ui/accordion";
 import { Button } from "~/components/ui/button";
 import { useBundleCart } from "~/context/bundle-cart-context";
-import { BUILDER_STEPS, type BuilderStepId } from "~/enums";
+import { BUILDER_STEPS, type BuilderStepId } from "~/config";
 import { getSelectedCountForStep } from "~/utils/bundle/cart";
 import { getProductsForStep } from "~/utils/bundle/steps";
 import type { Product } from "~/types/catalog";

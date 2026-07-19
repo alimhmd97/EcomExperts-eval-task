@@ -1,4 +1,4 @@
-import type { BuilderStepId } from "~/enums";
+import type { BuilderStepId } from "~/config";
 import type { CartSelection, Product } from "~/types/catalog";
 
 import { getVariantComparePrice, getVariantUnitPrice } from "./pricing";
