@@ -15,9 +15,9 @@ export function PriceDisplay({
     compareAtPrice != null && compareAtPrice > price;
 
   return (
-    <div className={`flex items-baseline gap-1.5 ${className}`}>
+    <div className={`flex flex-col items-end ${className}`}>
       {hasDiscount ? (
-        <span className="text-sm text-foreground-subtle line-through">
+        <span className="text-sm font-light text-red-600 line-through">
           {formatPrice(compareAtPrice)}
         </span>
       ) : null}

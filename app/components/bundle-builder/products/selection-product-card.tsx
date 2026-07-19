@@ -61,29 +61,29 @@ export function SelectionProductCard({ product }: SelectionProductCardProps) {
 
   return (
     <article
-      className={`relative flex h-full gap-4 overflow-hidden rounded-2xl border bg-background p-5 shadow-[0_1px_3px_rgba(0,0,0,0.06)] transition-colors builder:flex-col builder:gap-0 ${
+      className={`relative flex h-full min-w-[420px] items-center gap-4 overflow-hidden rounded-2xl border bg-background p-7 shadow-[0_1px_3px_rgba(0,0,0,0.06)] transition-colors builder:items-stretch builder:flex-col builder:gap-0 ${
         isSelected ? "border-primary" : "border-border"
       }`}
     >
       {product.badge ? <ProductBadge badge={product.badge} /> : null}
 
-      <div className="flex size-24 shrink-0 items-center justify-center builder:mb-4 builder:min-h-[148px] builder:w-full builder:px-2 builder:pt-2">
+      <div className="flex size-36 shrink-0 items-center justify-center builder:mb-4 builder:min-h-[148px] builder:w-full builder:px-2 builder:pt-2">
         <img
           src={product.imageUrl}
           alt={product.name}
           onError={(event) => {
             event.currentTarget.src = "/assets/images/camera1.png";
           }}
-          className="max-h-20 w-auto max-w-full object-contain builder:max-h-[132px]"
+          className="max-h-32 w-auto max-w-full object-contain builder:max-h-[132px]"
         />
       </div>
 
       <div className="flex flex-1 flex-col gap-3">
         <div className="space-y-1.5">
-          <h4 className="text-base font-bold leading-snug text-foreground">
+          <h4 className="text-base font-bold leading-snug text-foreground [overflow-wrap:anywhere]">
             {product.name}
           </h4>
-          <p className="text-sm font-medium leading-snug text-foreground-muted">
+          <p className="text-sm font-medium leading-snug text-foreground-muted [overflow-wrap:anywhere]">
             {product.description}
           </p>
           <a
