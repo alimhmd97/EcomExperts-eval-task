@@ -10,7 +10,6 @@ export function saveCartToStorage(selections: CartSelection[]): void {
   try {
     window.localStorage.setItem(STORAGE_KEY, JSON.stringify(selections));
   } catch {
-    // Ignore write failures (private mode, quota exceeded).
   }
 }
 

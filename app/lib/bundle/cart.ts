@@ -27,8 +27,6 @@ export function getSelectedCountForStep(
       .map((product) => product.id),
   );
 
-  // "N selected" reflects distinct products chosen in this step — a product
-  // counts once regardless of quantity or how many of its variants are added.
   const selectedProductIds = new Set(
     selections
       .filter(
