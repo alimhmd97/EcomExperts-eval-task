@@ -78,6 +78,13 @@ npm run typecheck # react-router typegen + tsc
   aren't strictly necessary at this scale — but it sets up well for
   extendability if the app grows.
 
+## Responsive layout & type scale
+
+Set in `app/app.css` via Tailwind v4's `@theme` — a `builder:` breakpoint at `1735px`.
+
+- **Layout:** below 1735px the page caps at `max-w-[85rem]`; above it, `builder:max-w-none` removes the cap and the grid stacks (`builder:flex-col`).
+- **Type scale:** the review panel's `text-*` variables get bumped above 1735px, e.g. `text-sm` = `0.875rem` normally → `1.25rem` above `builder`.
+
 ## Architecture
 
 Data flows one way: the catalog loads once, all mutable state lives in a
