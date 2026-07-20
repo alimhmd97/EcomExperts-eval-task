@@ -63,38 +63,20 @@ npm run typecheck # react-router typegen + tsc
 
 ## How it works
 
-- **Data-driven.** Products, variants, pricing, badges, and the seed cart all
-  come from `data/db.json` — nothing is hardcoded per product. Step config
-  (titles/icons/order) and review categories live in `app/config/`.
-- **Single source of truth.** All cart state lives in `BundleCartProvider`
-  (`app/context/bundle-cart-context.tsx`). The builder cards and review panel
-  read and write the same selections, so steppers stay in sync.
-- **Per-variant quantities.** Selections are keyed by `(productId, variantId)`,
-  so Red and Blue of the same product are tracked independently. Each card's
-  stepper is bound to its active variant; the review panel lists every variant
-  with quantity > 0 as its own line.
-- **Seed state.** On first load the cart is seeded (`seedSelections` in
-  `data/db.json`) to match the design — two cameras plus pre-populated
-  sensors, hub, accessory, and plan.
-- **Persistence.** "Save my system for later" writes the configuration to
-  `localStorage` (`app/lib/persistence.ts`) and restores it on reload. Changes
-  aren't persisted until saved. "Clear" or a fresh visit falls back to the seed.
-- **Pure logic.** Totals, savings, step counts, and review grouping are pure
-  functions in `app/utils/bundle/`.
+- **Data-driven.** Products, pricing, and the seed cart come from `data/db.json` — nothing is hardcoded per product.
+- **Single source of truth.** All cart state lives in one `BundleCartProvider`, so the builder and review panel always stay in sync.
+- **Per-variant quantities.** Each product variant (e.g. Red vs Blue) is tracked independently.
+- **Seed state.** The cart loads pre-populated to match the design.
+- **Persistence.** "Save my system for later" saves to `localStorage` and restores on reload.
+- **Pure logic.** Totals, savings, and grouping are pure functions, easy to test.
 
 ## Decisions & tradeoffs
 
-- **React Router v8 + TanStack Query** are kept from the project template.
-  For a static local catalog this is heavier than necessary; Query is used
-  only for loading/error ergonomics around the bundled JSON, which is
-  imported directly so a clean clone runs with just `npm run dev`.
-- **Approximate totals.** The seed reproduces the design's line items,
-  quantities, and prices. The struck-through total and savings are derived
-  from the catalog's `compareAtPrice` values and stay internally consistent
-  (struck − active = savings), so they may differ by a few dollars from the
-  spec's approximate "~$238.81 / ~$50.92".
-- **Checkout** is a placeholder: an inline "Order placed ✓" confirmation with
-  no real payment flow, as allowed by the brief.
+- **Structure is arguably over-engineered** for a project this size — e.g.
+  keeping React Router + TanStack Query from the template, and splitting the
+  file structure into separations (builder/products/review/shared/ui) that
+  aren't strictly necessary at this scale — but it sets up well for
+  extendability if the app grows.
 
 ## Architecture
 
@@ -122,13 +104,11 @@ shared/products layer.
 
 ```
 bundle-builder-page
-├─ builder/    step accordion, product grid, step header       ← user selects
-├─ products/   product cards, variant selector, badges,
-│              review line item                                ← shared by both
-├─ review/     panel, category groups, totals, actions,
-│              shipping row, guarantee                          ← live summary
-├─ shared/     price-display, quantity-stepper                  ← used by both
-└─ ui/         pure primitives: accordion, button               ← design-agnostic
+├─ builder/   the step-by-step flow where the user picks products
+├─ products/  product display pieces (cards, variants, badges) used by both sides
+├─ review/    the live "Your system" summary panel and its totals/actions
+├─ shared/    small pieces reused across builder and review (price, stepper)
+└─ ui/        generic, design-agnostic building blocks (accordion, button)
 ```
 
 ### Project structure
