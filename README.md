@@ -21,12 +21,14 @@ npm install
 npm run dev
 ```
 
-**Open <http://localhost:5173> in your browser.**
+**Open [http://localhost:5173](http://localhost:5173) in your browser.**
 
 The app is self-contained — the product catalog is a local JSON file
 (`data/db.json`), so no backend is required.
 
 ---
+
+
 
 ### Run the JSON server (API)
 
@@ -38,7 +40,7 @@ The app is self-contained — the product catalog is a local JSON file
 npm run api
 ```
 
-API runs at **<http://localhost:3001/products>**
+API runs at **[http://localhost:3001/products](http://localhost:3001/products)**
 
 **B) API + app together** — one command, both processes:
 
@@ -46,12 +48,14 @@ API runs at **<http://localhost:3001/products>**
 npm run dev:all
 ```
 
-App at **<http://localhost:5173>** · API at **<http://localhost:3001/products>**
+App at **[http://localhost:5173](http://localhost:5173)** · API at **[http://localhost:3001/products](http://localhost:3001/products)**
 
 > The web app reads `data/db.json` directly, so it runs fine without the API.
 > The JSON server is an optional bonus HTTP catalog.
 
 ---
+
+
 
 ### Other scripts
 
@@ -60,6 +64,8 @@ npm run build     # production build
 npm run start     # serve the production build
 npm run typecheck # react-router typegen + tsc
 ```
+
+
 
 ## How it works
 
@@ -70,20 +76,26 @@ npm run typecheck # react-router typegen + tsc
 - **Persistence.** "Save my system for later" saves to `localStorage` and restores on reload.
 - **Pure logic.** Totals, savings, and grouping are pure functions, easy to test.
 
+
+
 ## Decisions & tradeoffs
 
 - **Structure is arguably over-engineered** for a project this size — e.g.
-  keeping React Router + TanStack Query from the template, and splitting the
-  file structure into separations (builder/products/review/shared/ui) that
-  aren't strictly necessary at this scale — but it sets up well for
-  extendability if the app grows.
+keeping React Router + TanStack Query from the template, and splitting the
+file structure into separations (builder/products/review/shared/ui) that
+aren't strictly necessary at this scale — but it sets up well for
+extendability if the app grows.
+
+
 
 ## Responsive layout & type scale
 
-Set in `app/app.css` via Tailwind v4's `@theme` — a `builder:` breakpoint at `1735px`.
+Both driven from `app/app.css` via Tailwind v4's `@theme`, not per-component overrides:
 
-- **Layout:** below 1735px the page caps at `max-w-[85rem]`; above it, `builder:max-w-none` removes the cap and the grid stacks (`builder:flex-col`).
-- **Type scale:** the review panel's `text-*` variables get bumped above 1735px, e.g. `text-sm` = `0.875rem` normally → `1.25rem` above `builder`.
+- **Custom breakpoint.** `--breakpoint-builder: 108.4375rem` (1735px) defines a `builder:` variant matching the wide Figma layout. `bundle-builder-page.tsx` uses it to drop the `max-w-[85rem]` cap (`builder:max-w-none builder:px-10`) and switch the grid from a two-column `lg:grid-cols-[...]` layout to a stacked `builder:flex builder:flex-col` one once the viewport is wide enough.
+- **Font scaling without touching every element.** The review panel's `text-`* utilities (`text-xs` … `text-4xl`) are re-pointed to larger values inside a `@media (min-width: 108.4375rem)` block that overrides the CSS variables (`--text-xs`, `--text-sm`, etc.) scoped to `.review-panel`. Since Tailwind's `text-`* classes read from those variables, every element using them scales up together at the `builder` breakpoint with no per-element edits.
+
+
 
 ## Architecture
 
@@ -103,6 +115,8 @@ data/db.json ──► query/ (TanStack) ──► BundleCartProvider ──► 
                           pick products              live "Your system" summary
 ```
 
+
+
 ### Component map
 
 Grouped by role rather than file order — the page splits into a *builder*
@@ -118,6 +132,8 @@ bundle-builder-page
 └─ ui/        generic, design-agnostic building blocks (accordion, button)
 ```
 
+
+
 ### Project structure
 
 ```
@@ -132,3 +148,4 @@ app/
   query/, providers/           data access + QueryClientProvider
 data/db.json                   product catalog + seed cart
 ```
+
